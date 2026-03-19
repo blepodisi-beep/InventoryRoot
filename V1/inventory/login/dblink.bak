@@ -1,0 +1,26 @@
+<?php
+//ini_set('display_errors',1);
+$host="168.167.30.135";
+#$uname="root";
+$uname="admin";
+ # $pass="h0orc@dm1n";
+$pass="@dm1n01CA";	
+	
+$db="inventory";
+
+$myconn=mysqli_connect($host,$uname,$pass, $db);
+
+//check connection
+if (mysqli_connect_errno($myconn))
+
+   {
+     echo "Failed to connect to MySQL: " . mysqli_connect_error();
+   }
+
+else
+{
+echo "Connection successful ";
+echo "<br>";
+}
+?>
+

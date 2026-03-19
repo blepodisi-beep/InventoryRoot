@@ -1,0 +1,33 @@
+<?php
+
+require('login/dblink.php');
+$result=mysqli_query($myconn,"SELECT * FROM inventory ORDER BY equip_type ASC, sub_category ASC, custodian_ID ASC");
+$num_rows = mysqli_num_rows($result);
+echo "Total number of devices :"."<b>".$num_rows."</b>";
+echo "<hr>";
+while ($row = mysqli_fetch_array($result))
+
+
+{ 
+echo "<tr>";
+echo "<td><a id='{$row['ID']}' href ='index.php?id={$row['ID']}'>".$row['ID']."</a></td>";
+echo "<td>".$row['equip_type']."</td>";
+echo "<td>".$row['sub_category']."</td>";
+echo "<td>".$row['assetcode']."</td>";
+echo "<td>".$row['serialno']."</td>";
+echo "<td>".$row['make']."</td>";
+echo "<td>".$row['model']."</td>";
+echo "<td>".$row['custodian_id']."</td>";
+echo "<td>".$row['status']."</td>";
+}
+
+
+
+
+
+
+
+
+
+
+?>
