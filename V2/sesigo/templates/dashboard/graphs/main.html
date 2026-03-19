@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+{% load static %}
+<html lan="en">
+<head>
+<title> IT Inventory v.22</title>
+<link  rel="stylesheet" type="text/css" href="{% static 'dashboard/css/main.css'%}"/>
+</head>
+<BODY>
+<p>ORI IT Inventory 2022</p>
+<table id="device_count">
+<tr>
+<th><a href="http://168.167.30.135:9000/admin/dashboard/asset/">ALL</a></th><th>{{ ALL }}</th>
+<th><a href="http://168.167.30.135:9000/admin/dashboard/desktop/">Desktops</a></th><th>{{ desktops }}</th>
+<th><a href="http://168.167.30.135:9000/admin/dashboard/server/">Servers</a></th><th>{{ servers }}</th>
+<th><a href="http://168.167.30.135:9000/admin/dashboard/laptop/">Laptops</a></th><th>{{ laptops }}</th>
+<th><a href="http://168.167.30.135:9000/admin/dashboard/monitor/">Displays</a></th><th>{{ displays }}</th>
+<th><a href="http://168.167.30.135:9000/admin/dashboard/printer/">Printers</a></th><th>{{ printers }}</th>
+<th><a href="http://168.167.30.135:9000/admin/dashboard/scanner/">Scanners</a></th><th>{{ scanners }}</th>
+<th><a href="http://168.167.30.135:9000/admin/dashboard/projector/">Projectors</a></th><th>{{ projectors }}</th>
+<th><a href="http://168.167.30.135:9000/admin/dashboard/phone/">Mobile</a></th><th>{{ phones }}</th>
+<th><a href="http://168.167.30.135:9000/admin/dashboard/other_asset/">Others</a></th><th>{{ others }}</th>
+</tr>
+{% for i in data %}
+<th>{{ i }}</th><th></th>
+{% endfor %}
+</tr>
+</table>
+
+<div class="summary">
+
+{% block content %}
+  <div id="container" style="width: 75%;">
+    <canvas id="pie-chart"></canvas>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+  <script>
+
+    var config = {
+      type: 'bar',
+      data: {
+        datasets: [{
+          data: {{ data|safe }},
+          backgroundColor: [
+            'red', 'green','blue','orange','brown','red', 'green','blue','orange','brown'
+          ],
+          label: 'ORI IT Assets'
+        }],
+        labels: {{ labels|safe }}
+      },
+      options: {
+        responsive: true
+      }
+    };
+
+    window.onload = function() {
+      var ctx = document.getElementById('pie-chart').getContext('2d');
+      window.myPie = new Chart(ctx, config);
+    };
+
+ </script>
+
+{% endblock %}
+</div>
+<table id="test">
+<tr>
+{% for dict in data %}
+   {% for key, value in dict.items %}
+       <th><a href="http://168.167.30.135:9000/admin/dashboard/asset/">{{key}}</a></th><th>{{ values }}</th>
+   {% endfor %}
+{% endfor %}
+</tr>
+</table>
+</BODY>
+</HTML>	
